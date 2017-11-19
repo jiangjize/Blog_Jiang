@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jjz.dao.UserDao">
+
+    <cache/>
+
+    <!-- 登陆-->
+    <resultMap id="UserInfo" type="UserInfo">
+        <result property="userCode" column="UserCode"/>
+        <result property="userName" column="UserName"/>
+        <result property="userPwd" column="UserPwd" />
+        <result property="lastLoginTime" column="LastLoginTime" />
+        <result property="isUse" column="IsUse" />
+    </resultMap>
+    <select id="Login"  parameterType="String" resultType="int" >
+        select COUNT(1) as userCode  from userinfo where UserName=#{userName} and UserPwd=#{userPwd}
+    </select>
+    <!-- 查询所有用户-->
+    <select id="ListUser" resultType="Userinfo" >
+        select * from userinfo
+    </select>
+
+    <insert id="AddUser" flushCache="false" >
+    INSERT into userinfo(UserName,UserPwd,LastLoginTime) VALUES (#{userName},#{userPwd},#{lastLoginTime})
+   <selectKey keyProperty="userCode" resultType="int">
+     SELECT @@IDENTITY
+   </selectKey>
+    </insert>
+
+</mapper>

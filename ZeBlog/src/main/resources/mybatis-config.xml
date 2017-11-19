@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <setting name="cacheEnabled" value="true"/>
+
+    </settings>
+    <typeAliases>
+        <package name="cn.jjz.entity"></package>  <!--  entity下的实体类在User.xml中可以直接打实体类名如User-->
+        <!-- <typeAlias type="cn.jjz.entity.User" alias="User"></typeAlias>--><!--别名直接写User-->
+    </typeAliases>
+
+    <environments default="development">
+
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/blog?characterEncoding=utf-8" />
+                <property name="username" value="root" />
+                <property name="password" value="" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="cn/jjz/dao/UserDao.xml" />
+        <mapper resource="cn/jjz/dao/BlogDao.xml" />
+    </mappers>
+</configuration>
